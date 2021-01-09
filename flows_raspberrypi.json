@@ -383,11 +383,11 @@
         ],
         "out": [
             {
-                "x": 1040,
+                "x": 1140,
                 "y": 40,
                 "wires": [
                     {
-                        "id": "915d48d1.df2298",
+                        "id": "640746d.6b42fb8",
                         "port": 0
                     }
                 ]
@@ -487,14 +487,6 @@
         "y": 419,
         "w": 1052,
         "h": 210
-    },
-    {
-        "id": "a3ff9dba.19ebd",
-        "type": "ui_tab",
-        "name": "Gyro Setup",
-        "icon": "dashboard",
-        "disabled": false,
-        "hidden": false
     },
     {
         "id": "15c73bda.21351c",
@@ -2994,8 +2986,8 @@
         "z": "62f0c87d.299df",
         "name": "read gyro/acc",
         "env": [],
-        "x": 440,
-        "y": 140,
+        "x": 400,
+        "y": 180,
         "wires": [
             [
                 "8d63bcde.c24ed"
@@ -3014,8 +3006,8 @@
                 "type": "num"
             }
         ],
-        "x": 600,
-        "y": 140,
+        "x": 560,
+        "y": 180,
         "wires": [
             [
                 "b1252fb8.9a1ac8"
@@ -3067,8 +3059,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 760,
-        "y": 140,
+        "x": 720,
+        "y": 180,
         "wires": [
             [
                 "915d48d1.df2298"
@@ -3080,10 +3072,13 @@
         "type": "multiply",
         "z": "62f0c87d.299df",
         "name": "",
-        "x": 920,
-        "y": 140,
+        "transpose": false,
+        "x": 880,
+        "y": 180,
         "wires": [
-            []
+            [
+                "640746d.6b42fb8"
+            ]
         ]
     },
     {
@@ -3112,8 +3107,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 220,
-        "y": 140,
+        "x": 180,
+        "y": 180,
         "wires": [
             [
                 "b125818d.bdcdd8"
@@ -3170,6 +3165,7 @@
         "z": "46529fa5.9f2f08",
         "g": "ed3500fd.720128",
         "name": "",
+        "env": [],
         "x": 550,
         "y": 520,
         "wires": [
@@ -3361,6 +3357,7 @@
         "z": "46529fa5.9f2f08",
         "g": "ed3500fd.720128",
         "name": "",
+        "env": [],
         "x": 560,
         "y": 580,
         "wires": [
@@ -3496,5 +3493,205 @@
                 "778c7a25.e4a48c"
             ]
         ]
+    },
+    {
+        "id": "b39d0ac5.9033c",
+        "type": "trigger",
+        "z": "46529fa5.9f2f08",
+        "name": "",
+        "op1": "",
+        "op2": "0",
+        "op1type": "pay",
+        "op2type": "str",
+        "duration": "-100",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 300,
+        "y": 1160,
+        "wires": [
+            [
+                "8e3e8a00.0bbee8",
+                "4c18be63.6c3718"
+            ]
+        ]
+    },
+    {
+        "id": "ec150f60.0e9d4",
+        "type": "inject",
+        "z": "46529fa5.9f2f08",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "start",
+        "payloadType": "str",
+        "x": 120,
+        "y": 1160,
+        "wires": [
+            [
+                "b39d0ac5.9033c"
+            ]
+        ]
+    },
+    {
+        "id": "8e3e8a00.0bbee8",
+        "type": "subflow:f81b335d.1522c8",
+        "z": "46529fa5.9f2f08",
+        "name": "",
+        "env": [],
+        "x": 510,
+        "y": 1120,
+        "wires": [
+            [
+                "5abe9c96.abc84c"
+            ]
+        ]
+    },
+    {
+        "id": "4a2e584c.7d21c",
+        "type": "ui_gauge",
+        "z": "46529fa5.9f2f08",
+        "name": "pitch (acc)",
+        "group": "64ca67ed.9ded88",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "pitch (acc)",
+        "label": "deg",
+        "format": "{{value}}",
+        "min": "-90",
+        "max": "90",
+        "colors": [
+            "#e5e700",
+            "#00b500",
+            "#e5e700"
+        ],
+        "seg1": "-45",
+        "seg2": "45",
+        "x": 950,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "5abe9c96.abc84c",
+        "type": "function",
+        "z": "46529fa5.9f2f08",
+        "name": "atan2",
+        "func": "const calcAngleDegrees = (x, y) => {\n  return Math.atan2(y, x) * 180 / Math.PI\n}\n\n// const x = msg.payload[0]\nconst y = msg.payload[1]\nconst z = msg.payload[2]\n\n\n\nconst phi = Math.round(90 - calcAngleDegrees(y, z))\n\n\nreturn {\n    payload: phi\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 650,
+        "y": 1120,
+        "wires": [
+            [
+                "4a2e584c.7d21c"
+            ]
+        ]
+    },
+    {
+        "id": "4c18be63.6c3718",
+        "type": "subflow:62f0c87d.299df",
+        "z": "46529fa5.9f2f08",
+        "name": "",
+        "x": 510,
+        "y": 1200,
+        "wires": [
+            [
+                "22cd5618.62a9c2"
+            ]
+        ]
+    },
+    {
+        "id": "22cd5618.62a9c2",
+        "type": "change",
+        "z": "46529fa5.9f2f08",
+        "name": "round",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "[\t    $round(payload[0] / 1000),\t    $round(payload[1] / 1000),\t    $round(payload[2] / 1000)\t]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 650,
+        "y": 1200,
+        "wires": [
+            [
+                "468cc975.d05e4"
+            ]
+        ]
+    },
+    {
+        "id": "640746d.6b42fb8",
+        "type": "change",
+        "z": "62f0c87d.299df",
+        "name": "orientation",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "[\t    payload[0] * -1,\t    payload[1] * 1,\t    payload[2] * 1\t]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1030,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "468cc975.d05e4",
+        "type": "ui_gauge",
+        "z": "46529fa5.9f2f08",
+        "name": "d/dt pitch (gyro)",
+        "group": "64ca67ed.9ded88",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "d/dt pitch (gyro)",
+        "label": "deg/s",
+        "format": "{{value}}",
+        "min": "-90",
+        "max": "90",
+        "colors": [
+            "#e5e700",
+            "#00b500",
+            "#e5e700"
+        ],
+        "seg1": "-45",
+        "seg2": "45",
+        "x": 960,
+        "y": 1200,
+        "wires": []
     }
 ]
