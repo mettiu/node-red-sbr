@@ -569,7 +569,7 @@
             "name": "Node-RED Dashboard",
             "hideToolbar": "false",
             "allowSwipe": "false",
-            "lockMenu": "false",
+            "lockMenu": "true",
             "allowTempTheme": "true",
             "dateFormat": "DD/MM/YYYY",
             "sizes": {
@@ -599,7 +599,7 @@
         "tab": "ac41f4c8.1ded7",
         "order": 1,
         "disp": true,
-        "width": "6",
+        "width": "12",
         "collapse": false
     },
     {
@@ -3376,8 +3376,8 @@
         "level": "0",
         "freq": "",
         "out": "out",
-        "x": 760,
-        "y": 860,
+        "x": 750,
+        "y": 820,
         "wires": []
     },
     {
@@ -3390,8 +3390,8 @@
         "level": "0",
         "freq": "100",
         "out": "pwm",
-        "x": 740,
-        "y": 920,
+        "x": 730,
+        "y": 880,
         "wires": []
     },
     {
@@ -3411,8 +3411,8 @@
         "topic": "",
         "payload": "50",
         "payloadType": "num",
-        "x": 470,
-        "y": 900,
+        "x": 460,
+        "y": 860,
         "wires": [
             [
                 "778c7a25.e4a48c"
@@ -3436,8 +3436,8 @@
         "topic": "",
         "payload": "0",
         "payloadType": "num",
-        "x": 470,
-        "y": 740,
+        "x": 460,
+        "y": 700,
         "wires": [
             [
                 "778c7a25.e4a48c"
@@ -3461,8 +3461,8 @@
         "topic": "",
         "payload": "100",
         "payloadType": "num",
-        "x": 470,
-        "y": 1000,
+        "x": 460,
+        "y": 920,
         "wires": [
             [
                 "778c7a25.e4a48c"
@@ -3486,8 +3486,8 @@
         "topic": "",
         "payload": "1",
         "payloadType": "num",
-        "x": 470,
-        "y": 800,
+        "x": 460,
+        "y": 760,
         "wires": [
             [
                 "778c7a25.e4a48c"
@@ -3503,7 +3503,7 @@
         "op2": "0",
         "op1type": "pay",
         "op2type": "str",
-        "duration": "-100",
+        "duration": "-200",
         "extend": false,
         "overrideDelay": false,
         "units": "ms",
@@ -3566,8 +3566,8 @@
         "name": "pitch (acc)",
         "group": "64ca67ed.9ded88",
         "order": 3,
-        "width": 0,
-        "height": 0,
+        "width": "6",
+        "height": "4",
         "gtype": "gage",
         "title": "pitch (acc)",
         "label": "deg",
@@ -3581,7 +3581,7 @@
         ],
         "seg1": "-45",
         "seg2": "45",
-        "x": 950,
+        "x": 1130,
         "y": 1120,
         "wires": []
     },
@@ -3599,7 +3599,8 @@
         "y": 1120,
         "wires": [
             [
-                "4a2e584c.7d21c"
+                "4a2e584c.7d21c",
+                "5f423ded.7fb01c"
             ]
         ]
     },
@@ -3639,7 +3640,8 @@
         "y": 1200,
         "wires": [
             [
-                "468cc975.d05e4"
+                "468cc975.d05e4",
+                "eb124f49.5726c8"
             ]
         ]
     },
@@ -3674,9 +3676,9 @@
         "z": "46529fa5.9f2f08",
         "name": "d/dt pitch (gyro)",
         "group": "64ca67ed.9ded88",
-        "order": 3,
-        "width": 0,
-        "height": 0,
+        "order": 2,
+        "width": "6",
+        "height": "4",
         "gtype": "gage",
         "title": "d/dt pitch (gyro)",
         "label": "deg/s",
@@ -3690,8 +3692,111 @@
         ],
         "seg1": "-45",
         "seg2": "45",
-        "x": 960,
+        "x": 1140,
         "y": 1200,
         "wires": []
+    },
+    {
+        "id": "b2512b43.fde8e8",
+        "type": "ui_chart",
+        "z": "46529fa5.9f2f08",
+        "name": "",
+        "group": "64ca67ed.9ded88",
+        "order": 1,
+        "width": "12",
+        "height": "4",
+        "label": "chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "-60",
+        "ymax": "60",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "x": 1110,
+        "y": 1040,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5f423ded.7fb01c",
+        "type": "change",
+        "z": "46529fa5.9f2f08",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "acc",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 840,
+        "y": 1100,
+        "wires": [
+            [
+                "b2512b43.fde8e8"
+            ]
+        ]
+    },
+    {
+        "id": "eb124f49.5726c8",
+        "type": "change",
+        "z": "46529fa5.9f2f08",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "gyro",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0]",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 840,
+        "y": 1180,
+        "wires": [
+            [
+                "b2512b43.fde8e8"
+            ]
+        ]
     }
 ]
